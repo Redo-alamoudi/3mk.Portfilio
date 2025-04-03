@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class WeatherDataTracker {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Step 1: Create an array to store the temperature data for 3 cities over 7 days
+        int[][] temperatures = new int[3][7];
+
+        // Step 2: Input temperature data for each city
+        for (int i = 0; i < 3; i++) {
+            System.out.println("Enter the temperature data for City " + (i + 1) + " for 7 days:");
+            for (int j = 0; j < 7; j++) {
+                System.out.print("Day " + (j + 1) + ": ");
+                temperatures[i][j] = scanner.nextInt();
+            }
+        }
+
+        // Step 3: Calculate the average temperature for each city
+        double[] averageTemperatures = new double[3];
+        for (int i = 0; i < temperatures.length; i++) {
+            int sum = 0;
+            for (int j = 0; j < temperatures[i].length; j++) {
+                sum += temperatures[i][j];
+            }
+            averageTemperatures[i] = sum / 7.0;  // Divide by 7 to get the average
+        }
+
+        // Step 4: Find the highest temperature recorded for each city
+        int[] highestTemperatures = new int[3];
+        for (int i = 0; i < temperatures.length; i++) {
+            int highest = temperatures[i][0];  // Start with the first day's temperature
+            for (int j = 1; j < temperatures[i].length; j++) {
+                if (temperatures[i][j] > highest) {
+                    highest = temperatures[i][j];
+                }
+            }
+            highestTemperatures[i] = highest;
+        }
+
+        // Step 5: Output the results
+        for (int i = 0; i < 3; i++) {
+            System.out.println("City " + (i + 1) + ":");
+            System.out.print("  Temperature Data: ");
+            for (int j = 0; j < 7; j++) {
+                System.out.print(temperatures[i][j] + " ");
+            }
+            System.out.println();
+            System.out.printf("  Average Temperature: %.2f°C\n", averageTemperatures[i]);
+            System.out.println("  Highest Temperature: " + highestTemperatures[i] + "°C");
+            System.out.println();
+        }
+
+        // Close the scanner to prevent resource leak
+        scanner.close();
+    }
+}
