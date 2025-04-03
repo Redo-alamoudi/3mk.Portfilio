@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class SimpleNumberConverter {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        while (true) {
+            System.out.print("Enter a decimal number (or 'STOP' to exit): ");
+            String input = sc.nextLine();
+            
+            if (input.equalsIgnoreCase("STOP")) {
+                break;
+            }
+            
+            try {
+                int num = Integer.parseInt(input);
+                System.out.println("Converting " + num + ":");
+                
+                for (int base = 2; base <= 16; base++) {
+                    System.out.println("Base " + base + ": " + convert(num, base));
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number!");
+            }
+        }
+        
+        sc.close();
+        System.out.println("Program ended.");
+    }
+    
+    public static String convert(int num, int base) {
+        if (num == 0) return "0";
+        
+        String digits = "0123456789ABCDEF";
+        String result = "";
+        boolean negative = num < 0;
+        num = Math.abs(num);
+        
+        while (num > 0) {
+            result = digits.charAt(num % base) + result;
+            num /= base;
+        }
+        
+        return negative ? "-" + result : result;
+    }
+}
