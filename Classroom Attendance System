@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class SimpleAttendance {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter the total number of students: ");
+        int total = sc.nextInt();
+        sc.nextLine(); // Clear the newline
+        
+        int present = 0;
+        int absent = 0;
+        
+        for (int i = 1; i <= total; i++) {
+            System.out.print("Is student " + i + " present? (Y/N): ");
+            String answer = sc.nextLine().toUpperCase();
+            
+            if (answer.equals("Y")) {
+                present++;
+            } else {
+                absent++;
+            }
+        }
+        
+        System.out.println("\nTotal present: " + present);
+        System.out.println("Total absent: " + absent);
+        
+        sc.close();
+    }
+}
